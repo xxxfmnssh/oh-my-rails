@@ -1,3 +1,1 @@
-# config.ru
- 
-run Proc.new { |env| ['200', {'Content-Type' => 'text/html'}, ['hello world']] }
+run(proc { |_env| ['200', { 'Content-Type' => 'text/html' }, ['hello world']] })
