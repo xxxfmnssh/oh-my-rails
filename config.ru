@@ -13,6 +13,7 @@ class Application
       elsif method == 'POST'
         post(path, method)
       end
+
     else
       request_path(path)
     end
@@ -28,3 +29,4 @@ class Application
 end
 
 run Application.new
+
