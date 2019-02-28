@@ -1,12 +1,24 @@
+require 'pry'
+
 class Application
   def call(env)
-    req = Rack::Request.new(env)
-    case req.path_info
-    when /signup/
-      [200, { 'Content-Type' => 'text/html' }, ['<h1>Signup me please</h1>']]
-    else
-      [200, { 'Content-Type' => 'text/html' }, ['<html><body><h1>Hello World</h1></body></html>']]
+    request(env['REQUEST_METHOD'], env['PATH_INFO'])
+  end
+
+  def request(method, path)
+    if method == 'GET'
+      get(path)
+    elsif method == 'POST'
+      post(path)
     end
+  end
+
+  def get(path)
+    [200, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path},using GET"]]
+  end
+
+  def post(path)
+    [201, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path},using POST"]]
   end
 end
 
