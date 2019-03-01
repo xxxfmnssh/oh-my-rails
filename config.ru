@@ -1,19 +1,40 @@
-require 'pp'
+require 'pry'
 
 class Application
   def call(env)
-    req = Rack::Request.new(env)
-    pp env
-    case env['REQUEST_PATH']
-    when /signup/
-    	filename = req.path_info.gsub('/', '')
-    	view = File.open("#{filename}.html").read   	 	
-      [200, { 'Content-Type' => 'text/html' }, [view]]
-    else
-      [200, { 'Content-Type' => 'text/html' }, ['<html><body><h1>Hello World</h1></body></html>']]
+    request(env['REQUEST_METHOD'], env['PATH_INFO'])
+  end
+
+  def request(method, path)
+    if method == 'GET'
+      get(path)
+    if path == '/signup'
+      request_path
+    end
+
+    if method == 'POST'
+      post(path)
+    if path == '/signup'
+      request_path
+    end
+     
+    else path
+      request_path(path)
     end
   end
 end
 
-run Application.new
+  def get(path)
+    [200, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path},using GET"]]
+  end
 
+  def post(path)
+    [201, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path},using POST"]]
+  end
+
+  def request_path(path)
+    [404, { 'Content-Type' => 'text/html' },["Hey, I dont know what you mean"]]
+  end
+end
+
+run Application.new

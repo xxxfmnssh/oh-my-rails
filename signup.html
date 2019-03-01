@@ -18,3 +18,10 @@
 
 </body>
 </html>
+
+
+
+
+when /signup/
+    	filename = req.path_info.gsub('/', '')
+    	view = File.open("#{filename}.html").read  
