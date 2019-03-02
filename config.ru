@@ -8,17 +8,14 @@ class Application
   def request(method, path)
     if path == '/signup'
       if method == 'GET'
-        get(path, method)
+        text = "You have requested the path #{path}, using #{method}"
+        [200, { 'Content-Type' => 'text/html' }, [text]]
       elsif method == 'POST'
         post(path, method)
       end
     else
       request_path(path)
     end
-  end
-
-  def get(path, method)
-    [200, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path}, using #{method}"]]
   end
 
   def post(path, method)
