@@ -8,18 +8,21 @@ class Application
   def request(method, path)
     if path == '/signup'
       if method == 'GET'
-        text = "You have requested the path #{path}, using #{method}"
-        [200, { 'Content-Type' => 'text/html' }, [text]]
+        signup = File.open('signup.html').read
+        [200, { 'Content-Type' => 'text/html' }, [signup]]
       elsif method == 'POST'
         post(path, method)
       end
+    elsif path == '/posts' && method == 'GET'
+      posts = File.open('posts.html').read
+      [200, { 'Content-Type' => 'text/html' }, [posts]]
     else
       request_path(path)
     end
   end
 
-  def get(path, method)
-    [200, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path}, using #{method}"]]
+  def post(path, method)
+    [201, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path}, using #{method}"]]
   end
 
   def request_path(_path)
