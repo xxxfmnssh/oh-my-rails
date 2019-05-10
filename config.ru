@@ -2,14 +2,16 @@ require 'pry'
 
 class Application
   def call(env)
-    request(env['REQUEST_METHOD'], env['PATH_INFO'])
+    request(env['REQUEST_METHOD'], env['PATH_INFO'], Rack::Request.new(env).params)
   end
 
-  def request(method, path)
+  def request(method, path, params)
     if path == '/signup'
       if method == 'GET'
-        signup = File.open('signup.html').read
-        [200, { 'Content-Type' => 'text/html' }, [signup]]
+        email = params['email']
+        password = params['password']
+        phrase = "Your email is #{email} and your password is #{password}"
+        [200, { 'Content-Type' => 'text/html' }, [phrase]]
       elsif method == 'POST'
         post(path, method)
       end
