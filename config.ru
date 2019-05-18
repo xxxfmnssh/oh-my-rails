@@ -6,25 +6,25 @@ class Application
   end
 
   def request(method, path, params)
-    if path == '/signup'
-      if method == 'GET'
+    if method == 'GET' && path == '/signup'
+      email = params['email']
+      password = params['password']
+      phrase = "Your email is #{email} and your password is #{password}"
+      [200, { 'Content-Type' => 'text/html' }, [phrase]]
+      if path == '/signup'
+        signup = File.open('signup.html').read
+        [200, { 'Content-Type' => 'text/html' }, [signup]]
+      elsif method == 'POST' && path = '/signup'
         email = params['email']
-        password = params['password']
-        phrase = "Your email is #{email} and your password is #{password}"
-        [200, { 'Content-Type' => 'text/html' }, [phrase]]
-      elsif method == 'POST'
-        post(path, method)
-      end
+        answer = "Your #{email}"
+        [200, { 'Content-Type' => 'text/html' }, [answer]]
+    end
     elsif path == '/posts' && method == 'GET'
       posts = File.open('posts.html').read
       [200, { 'Content-Type' => 'text/html' }, [posts]]
     else
       request_path(path)
-    end
   end
-
-  def post(path, method)
-    [201, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path}, using #{method}"]]
   end
 
   def request_path(_path)
