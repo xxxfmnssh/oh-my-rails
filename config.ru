@@ -20,21 +20,4 @@ class Application
     end
   end
 
-<<<<<<< HEAD
-=======
-  def get(path, method, _signup, email: 'foobar@gmail.com', password: 'foobar')
-    [200, { 'Content-Type' => 'text/html' },
-     ["You have requested the path #{path}, using #{method},whith params:#{email}, #{password}"]]
-  end
-
-  def post(path, method)
-    [201, { 'Content-Type' => 'text/html' }, ["You have requested the path #{path}, using #{method}"]]
-  end
-
->>>>>>> 09e3c7945f8bfe974c218b5ef65a36709d657ad2
-  def request_path(_path)
-    [404, { 'Content-Type' => 'text/html' }, ['Hey, I dont know what you mean']]
-  end
-end
-
 run Application.new
