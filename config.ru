@@ -1,4 +1,5 @@
 require 'pry'
+require 'pg'
 
 class Application
   def call(env)

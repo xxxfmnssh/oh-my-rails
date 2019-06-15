@@ -6,3 +6,6 @@ Metrics/LineLength:
 
 Metrics/MethodLength:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
