@@ -1,8 +1,8 @@
-require 'pg'
+# require 'pg'
 
-db = PG.connect(dbname: 'signup_db', user: 'signup_us', password: 'foobar')
-signup = db.exec('SELECT * FROM signup')
-signup.each do |signup|
-puts signup
-end
-
+# module Database
+#   def insert(email, password)
+#     db = PG.connect(dbname: 'signup_db', user: 'signup_us', password: 'foobar')
+#     db.exec("INSERT INTO signup (email, password) VALUES ('#{email}', '#{password}')")
+#   end
+# end
